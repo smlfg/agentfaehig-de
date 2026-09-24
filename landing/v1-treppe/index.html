@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>agentfähig.de — Die Treppe: vom Fragen zum Auftrag</title>
+<meta name="description" content="Ein ruhiger Einstieg: In vier Stufen lernst du, wie du mit KI-Agenten arbeitest. Mit dem guten Auftrag in fünf Teilen und drei Regeln für den sicheren Start.">
+<style>
+  :root {
+    --bg: #faf6ee;
+    --bg-soft: #f2ead9;
+    --card: #fffdf8;
+    --card-soft: #fbf7ee;
+    --ink: #2e2a24;
+    --ink-soft: #57503f;
+    --line: #e4dac7;
+    --line-soft: #efe7d7;
+    --accent: #4f7d5e;
+    --accent-soft: #dceadd;
+    --accent-ink: #2f5238;
+    --btn-bg: #4f7d5e;
+    --btn-ink: #ffffff;
+    --btn-bg-hover: #43704f;
+    --sand: #e9dcc4;
+    --focus: #2f5238;
+    --shadow: 0 1px 2px rgba(60, 48, 30, .06), 0 14px 34px -16px rgba(60, 48, 30, .22);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1b1a17;
+      --bg-soft: #211f1a;
+      --card: #26241f;
+      --card-soft: #2b2823;
+      --ink: #efe9dd;
+      --ink-soft: #c6bda9;
+      --line: #3a362e;
+      --line-soft: #332f28;
+      --accent: #a9d3b2;
+      --accent-soft: #2b3a30;
+      --accent-ink: #d9edda;
+      --btn-bg: #a9d3b2;
+      --btn-ink: #17251a;
+      --btn-bg-hover: #bfe0c6;
+      --sand: #3b342a;
+      --focus: #c7e5cc;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 16px 38px -18px rgba(0, 0, 0, .7);
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: none; }
+
+  body {
+    margin: 0;
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(1100px 520px at 12vw -6vh, var(--bg-soft), transparent),
+      radial-gradient(900px 460px at 94vw 4vh, var(--accent-soft), transparent);
+    background-repeat: no-repeat;
+    color: var(--ink);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.7;
+    letter-spacing: .001em;
+    overflow-wrap: break-word;
+  }
+
+  a { color: var(--accent-ink); text-decoration-thickness: .1em; text-underline-offset: .18em; }
+  a:hover { text-decoration-thickness: .16em; }
+
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  .skip {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--card);
+    color: var(--ink);
+    padding: .7rem 1.1rem;
+    border-radius: 0 0 var(--radius-sm) 0;
+    z-index: 10;
+  }
+  .skip:focus { left: 0; }
+
+  .wrap {
+    max-width: 62rem;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 5vw, 2.5rem);
+  }
+
+  /* ---------- Hero ---------- */
+
+  .hero {
+    padding-block: clamp(3rem, 11vw, 6.5rem) clamp(2.5rem, 8vw, 5rem);
+  }
+
+  .kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    margin: 0 0 1.25rem;
+    padding: .4rem .9rem;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    border-radius: 999px;
+    font-size: .95rem;
+    font-weight: 600;
+    letter-spacing: .01em;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(1.85rem, 7.2vw, 3.35rem);
+    line-height: 1.14;
+    letter-spacing: -.015em;
+    font-weight: 700;
+    max-width: 22ch;
+  }
+
+  .lede {
+    margin: 1.4rem 0 0;
+    max-width: 46ch;
+    font-size: clamp(1.075rem, 3.2vw, 1.3rem);
+    color: var(--ink-soft);
+  }
+
+  .hero-actions {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .95rem 1.5rem;
+    min-height: 3rem;
+    background: var(--btn-bg);
+    color: var(--btn-ink);
+    border: none;
+    border-radius: 999px;
+    font: inherit;
+    font-weight: 650;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: background-color .18s ease, transform .18s ease;
+  }
+  .btn:hover { background: var(--btn-bg-hover); transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+
+  .btn-quiet {
+    background: transparent;
+    color: var(--ink);
+    box-shadow: none;
+    border: 1.5px solid var(--line);
+  }
+  .btn-quiet:hover { background: var(--bg-soft); }
+
+  .hero-hint { margin: .2rem 0 0; font-size: 1rem; color: var(--ink-soft); }
+
+  /* ---------- Sections ---------- */
+
+  section { padding-block: clamp(2.5rem, 7vw, 4.5rem); }
+
+  h2 {
+    margin: 0 0 1rem;
+    font-size: clamp(1.5rem, 5vw, 2.15rem);
+    line-height: 1.2;
+    letter-spacing: -.01em;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: clamp(1.3rem, 4.2vw, 1.7rem);
+    line-height: 1.25;
+    letter-spacing: -.01em;
+  }
+
+  .section-lede {
+    margin: 0;
+    max-width: 52ch;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Was ist ein Agent ---------- */
+
+  .explain {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.4rem, 5vw, 2.5rem);
+    box-shadow: var(--shadow);
+  }
+
+  .explain p { margin: 0 0 1rem; max-width: 58ch; }
+  .explain p:last-child { margin-bottom: 0; }
+
+  .analogy {
+    margin-top: 1.4rem;
+    padding: 1.05rem 1.2rem;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    border-radius: var(--radius-md);
+    font-weight: 550;
+  }
+  .analogy p { margin: 0; }
+
+  /* ---------- Rollenwechsel ---------- */
+
+  .switch {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  @media (min-width: 46rem) {
+    .switch { grid-template-columns: 1fr 1fr; }
+  }
+
+  .switch-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.35rem;
+    box-shadow: var(--shadow);
+  }
+
+  .switch-card h3 { font-size: 1.15rem; margin-bottom: .5rem; }
+  .switch-card p { margin: 0; color: var(--ink-soft); }
+
+  /* ---------- Der gute Auftrag ---------- */
+
+  .kit {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: .8rem;
+  }
+
+  .part {
+    display: flex;
+    gap: .9rem;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: .95rem 1.1rem;
+    box-shadow: var(--shadow);
+  }
+
+  .part-num {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    font-weight: 700;
+    font-size: .95rem;
+  }
+
+  .part-body { min-width: 0; }
+  .part-name { margin: 0; font-weight: 700; }
+  .part-text { margin: .15rem 0 0; color: var(--ink-soft); }
+
+  .beforeafter {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+
+  @media (min-width: 46rem) {
+    .beforeafter { grid-template-columns: 1fr 1fr; }
+  }
+
+  .ba {
+    border: 1.5px dashed var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--card-soft);
+    padding: 1.15rem 1.25rem;
+  }
+
+  .ba-good { border-style: solid; border-color: var(--accent); background: var(--card); }
+
+  .ba h3 { font-size: 1.05rem; margin-bottom: .65rem; }
+
+  .quote {
+    margin: 0;
+    padding: .8rem .9rem;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font: inherit;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .ba-note { margin: .7rem 0 0; font-size: 1rem; color: var(--ink-soft); }
+
+  /* ---------- Die Treppe ---------- */
+
+  .stair-intro { margin-bottom: clamp(1.5rem, 5vw, 2.25rem); }
+
+  .summit {
+    margin-bottom: clamp(1.25rem, 4vw, 1.9rem);
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.1rem, 4vw, 1.7rem);
+  }
+
+  .summit h3 { margin: 0 0 .4rem; }
+  .summit p { margin: 0 0 1rem; max-width: 58ch; }
+  .summit p:last-child { margin-bottom: 0; }
+
+  .stairs {
+    display: grid;
+    gap: clamp(1rem, 3vw, 1.5rem);
+  }
+
+  .step {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.25rem, 4.5vw, 2.25rem);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: border-color .2s ease;
+  }
+
+  .step::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 6px;
+    background: var(--accent);
+    opacity: .85;
+  }
+
+  .step:hover { border-color: var(--accent); }
+
+  .s1 { margin-inline-start: 0; }
+  .s2 { margin-inline-start: .75rem; }
+  .s3 { margin-inline-start: 1.5rem; }
+  .s4 { margin-inline-start: 2.25rem; }
+
+  .step-head {
+    display: flex;
+    align-items: center;
+    gap: .9rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .step-num {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 2.85rem;
+    height: 2.85rem;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  .step-tag {
+    display: block;
+    margin: .1rem 0 0;
+    font-size: .95rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .step p { margin: 0 0 1.1rem; }
+
+  .learn {
+    max-width: 62ch;
+    color: var(--ink-soft);
+  }
+
+  .cats {
+    list-style: none;
+    margin: 0 0 1.4rem;
+    padding: 0;
+    display: grid;
+    gap: .85rem;
+  }
+
+  .cat {
+    background: var(--card-soft);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.1rem;
+  }
+
+  .cat-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .8rem;
+    flex-wrap: wrap;
+    margin-bottom: .35rem;
+  }
+
+  .cat-name { font-weight: 700; }
+
+  .badge {
+    flex: none;
+    font-size: .85rem;
+    font-weight: 700;
+    letter-spacing: .02em;
+    padding: .2rem .65rem;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+  }
+  .badge-mid { background: var(--sand); color: var(--ink); }
+
+  .cat p { margin: 0; color: var(--ink-soft); }
+
+  .examples {
+    margin: .5rem 0 0;
+    font-size: 1rem;
+    color: var(--ink-soft);
+  }
+  .examples strong { color: var(--ink); }
+
+  /* ---------- Auftrag / Kopieren ---------- */
+
+  .task {
+    margin-top: 1.2rem;
+    border: 1.5px dashed var(--accent);
+    border-radius: var(--radius-md);
+    padding: 1.05rem 1.1rem;
+    background: var(--card-soft);
+  }
+
+  .task-label {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin: 0 0 .5rem;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--accent-ink);
+  }
+
+  .task-text {
+    margin: 0 0 .9rem;
+    padding: .85rem 1rem;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-size: 1.05rem;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .copy-btn { font-size: 1rem; padding: .7rem 1.15rem; min-height: 2.6rem; }
+
+  .copied-note {
+    display: inline-block;
+    margin-inline-start: .75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--accent-ink);
+  }
+
+  /* ---------- Sicherheitsregeln ---------- */
+
+  .care-list {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 46rem) {
+    .care-list { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .care {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 1.35rem 1.35rem;
+    box-shadow: var(--shadow);
+  }
+
+  .care-icon {
+    display: grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    margin-bottom: .8rem;
+  }
+
+  .care h3 { font-size: 1.2rem; margin-bottom: .4rem; }
+  .care p { margin: 0; color: var(--ink-soft); font-size: 1.05rem; }
+
+  /* ---------- Beispiel-Hinweis ---------- */
+
+  .note {
+    margin: 1.5rem 0 0;
+    font-size: 1rem;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  /* ---------- Footer ---------- */
+
+  footer {
+    margin-top: clamp(2.5rem, 8vw, 5rem);
+    border-top: 1px solid var(--line);
+    background: var(--card-soft);
+  }
+
+  .foot-inner {
+    padding-block: 2.25rem 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
+  .foot-brand { margin: 0; font-weight: 650; }
+  .foot-note { margin: .35rem 0 0; font-size: 1rem; color: var(--ink-soft); max-width: 40ch; }
+
+  .foot-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem 1.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* ---------- Sanftes Einblenden ---------- */
+
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+
+  .js .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: .001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .001ms !important;
+      scroll-behavior: auto !important;
+    }
+    .js .reveal { opacity: 1; transform: none; }
+    .btn:hover { transform: none; }
+  }
+
+  html { scroll-behavior: smooth; }
+</style>
+<script>
+  /* Nur mit JavaScript darf CSS Inhalte verstecken und animieren.
+     Ohne JavaScript bleibt alles sichtbar. */
+  document.documentElement.classList.add('js');
+</script>
+</head>
+<body>
+<a class="skip" href="#inhalt">Zum Inhalt springen</a>
+
+<header class="hero wrap">
+  <p class="kicker">
+    <span aria-hidden="true">&#9737;</span>
+    Ein ruhiger Einstieg in KI-Agenten
+  </p>
+  <h1>Du musst nicht programmieren, um mit KI-Agenten zu arbeiten.</h1>
+  <p class="lede">
+    Diese Seite ist eine Treppe. Vier Stufen: erst fragen, dann gemeinsam arbeiten,
+    dann beauftragen, dann abnehmen. Auf jeder Stufe wartet ein Auftrag, den du direkt kopieren
+    und ausprobieren kannst. Du gehst in deinem Tempo.
+  </p>
+  <div class="hero-actions">
+    <a class="btn" href="#stufe-1">
+      Erste Stufe ansehen
+      <span aria-hidden="true">&darr;</span>
+    </a>
+    <p class="hero-hint">Kein Vorwissen nötig. Du gehst Stufe für Stufe.</p>
+  </div>
+</header>
+
+<main id="inhalt">
+
+  <!-- Was ist ein Agent -->
+  <section class="wrap" aria-labelledby="was-ist-ein-agent">
+    <div class="explain reveal">
+      <h2 id="was-ist-ein-agent">Was ist ein Agent?</h2>
+      <p>
+        Ein Agent ist ein KI-Programm, das nicht nur antwortet, sondern Schritte für dich erledigt.
+      </p>
+      <p>
+        Du gibst ihm einen Auftrag. Er zerlegt ihn selbst in kleine Schritte und bringt dir ein Ergebnis.
+      </p>
+      <p>
+        Du musst dafür nichts über Technik wissen. Du redest einfach mit ihm, wie mit einem Menschen.
+      </p>
+      <div class="analogy">
+        <p>
+          Stell dir einen neuen Praktikanten vor: Du sagst ihm, was du brauchst, und er kümmert sich.
+          Genau so arbeitest du mit einem Agenten — nur digital.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Der Sprung -->
+  <section class="wrap" aria-labelledby="der-sprung">
+    <div class="reveal">
+      <h2 id="der-sprung">Der Sprung: vom Fragen zum Auftragen</h2>
+      <p class="section-lede">
+        Der Schritt zum Agenten ist kein neues Programm. Es ist ein Rollenwechsel:
+        Aus der Fragenden wird die Auftraggeberin. Du fragst nicht mehr nur,
+        du gibst einen Auftrag — wie einem neuen Praktikanten.
+      </p>
+      <div class="switch">
+        <div class="switch-card">
+          <h3>Im Chat</h3>
+          <p>
+            Du fragst, die KI antwortet. Gefällt dir die Antwort nicht, fragst du noch einmal nach.
+            Es bleibt ein Hin und Her.
+          </p>
+        </div>
+        <div class="switch-card">
+          <h3>Als Auftraggeberin</h3>
+          <p>
+            Du gibst einen Auftrag. Der Agent plant mehrere Schritte, arbeitet sie ab und legt dir
+            ein Ergebnis vor. Du schaust drüber und gibst frei.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Der gute Auftrag in fünf Teilen -->
+  <section class="wrap" aria-labelledby="guter-auftrag">
+    <div class="reveal">
+      <h2 id="guter-auftrag">Der gute Auftrag in fünf Teilen</h2>
+      <p class="section-lede">
+        Ein Einzeiler wie bei der Suche reicht nicht. Ein guter Auftrag hat fünf Teile.
+        Du kannst sie einfach der Reihe nach hinschreiben.
+      </p>
+    </div>
+
+    <ol class="kit">
+      <li class="part reveal">
+        <span class="part-num" aria-hidden="true">1</span>
+        <div class="part-body">
+          <p class="part-name">Ziel</p>
+          <p class="part-text">Was soll am Ende da sein?</p>
+        </div>
+      </li>
+      <li class="part reveal">
+        <span class="part-num" aria-hidden="true">2</span>
+        <div class="part-body">
+          <p class="part-name">Kontext</p>
+          <p class="part-text">Was muss der Agent wissen? Zum Beispiel: für wen, wofür, in welcher Situation.</p>
+        </div>
+      </li>
+      <li class="part reveal">
+        <span class="part-num" aria-hidden="true">3</span>
+        <div class="part-body">
+          <p class="part-name">Grenzen</p>
+          <p class="part-text">Was soll er nicht tun? Zum Beispiel: nichts kaufen, nichts senden, keine Foren.</p>
+        </div>
+      </li>
+      <li class="part reveal">
+        <span class="part-num" aria-hidden="true">4</span>
+        <div class="part-body">
+          <p class="part-name">Fertig, wenn</p>
+          <p class="part-text">Woran erkennst du, dass es erledigt ist? Nenne ein klares Zeichen.</p>
+        </div>
+      </li>
+      <li class="part reveal">
+        <span class="part-num" aria-hidden="true">5</span>
+        <div class="part-body">
+          <p class="part-name">Bei Unklarheit</p>
+          <p class="part-text">Erfinde nichts. Schreib „unbekannt“ oder frag mich.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="beforeafter reveal">
+      <div class="ba">
+        <h3>Vorher — zu kurz</h3>
+        <p class="quote">Recherchiere Wärmepumpen.</p>
+        <p class="ba-note">
+          Kein Ziel, kein Kontext, keine Grenze. Der Agent muss raten — und liefert irgendetwas.
+        </p>
+      </div>
+      <div class="ba ba-good">
+        <h3>Nachher — der gute Auftrag</h3>
+        <p class="quote">Zeig mir zuerst deinen Plan und warte auf mein OK.
+
+Ziel: Fasse zusammen, ob sich eine Wärmepumpe für ein Reihenhaus lohnt.
+Kontext: Baujahr 1998, aktuell Gasheizung, ich wohne in der Stadt.
+Grenzen: Nur Seiten von Bund, Land oder Verbraucherzentralen. Keine Foren, nichts kaufen.
+Fertig, wenn: Fünf Punkte dastehen, jeder mit einer Quelle.
+Bei Unklarheit: Erfinde nichts. Schreib „unbekannt“ oder frag mich.</p>
+        <p class="ba-note">
+          Dieselbe Aufgabe — aber der Agent weiß jetzt, wohin die Reise geht und wo er anhalten muss.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Die Treppe -->
+  <section class="wrap" aria-labelledby="die-treppe">
+    <div class="stair-intro reveal">
+      <h2 id="die-treppe">Die Treppe</h2>
+      <p class="section-lede">
+        Von unten nach oben. Jede Stufe baut auf der vorigen auf, aber du kannst auch
+        direkt dort einsteigen, wo du dich wohlfühlst.
+      </p>
+    </div>
+
+    <div class="summit reveal">
+      <h3>Ganz oben auf der Treppe: Beaufsichtigen</h3>
+      <p>
+        Auf der obersten Stufe laufen mehrere Agenten gleichzeitig, und du behältst den Überblick:
+        Wer macht was, was ist fertig, und wo musst du entscheiden.
+        Wenn du Agenten Aufträge gibst und abnimmst, hilft dir HAI, den Überblick zu behalten.
+      </p>
+      <a class="btn" href="https://human-agent-interface.com">
+        Zu HAI
+        <span aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+
+    <div class="stairs">
+
+      <!-- Stufe 1 -->
+      <article class="step s1 reveal" id="stufe-1" aria-labelledby="stufe-1-titel">
+        <div class="step-head">
+          <span class="step-num" aria-hidden="true">1</span>
+          <div>
+            <h3 id="stufe-1-titel">Fragen</h3>
+            <span class="step-tag">Stufe 1 von 4</span>
+          </div>
+        </div>
+        <p class="learn">
+          Hier fängst du an: Du fragst, die KI antwortet. Du lernst, klar zu fragen
+          und so lange nachzuhaken, bis es wirklich passt.
+        </p>
+        <ul class="cats">
+          <li class="cat">
+            <div class="cat-head">
+              <span class="cat-name">Chat-Assistenten</span>
+              <span class="badge">leicht</span>
+            </div>
+            <p><strong>Wofür:</strong> Fragen stellen, Texte schreiben, dir Dinge einfach erklären lassen.</p>
+            <p class="examples"><strong>Beispiele:</strong> ChatGPT, Claude, Gemini</p>
+          </li>
+        </ul>
+        <div class="task">
+          <p class="task-label"><span aria-hidden="true">&#9998;</span> Auftrag zum Kopieren</p>
+          <p class="task-text" id="auftrag-1">Zeig mir zuerst deinen Plan und warte auf mein OK.
+
+Ziel: Erklär mir in drei einfachen Sätzen, was ein KI-Agent ist.
+Kontext: Ich fange gerade erst an und habe keine Vorkenntnisse.
+Grenzen: Keine Fachwörter ohne kurze Erklärung.
+Fertig, wenn: Drei Sätze dastehen, die ich weitererzählen kann.
+Bei Unklarheit: Erfinde nichts. Schreib „unbekannt“ oder frag mich.</p>
+          <button class="btn copy-btn" type="button" data-copy="auftrag-1">Auftrag kopieren</button>
+          <span class="copied-note" role="status" aria-live="polite"></span>
+        </div>
+      </article>
+
+      <!-- Stufe 2 -->
+      <article class="step s2 reveal" id="stufe-2" aria-labelledby="stufe-2-titel">
+        <div class="step-head">
+          <span class="step-num" aria-hidden="true">2</span>
+          <div>
+            <h3 id="stufe-2-titel">Zusammenarbeiten</h3>
+            <span class="step-tag">Stufe 2 von 4</span>
+          </div>
+        </div>
+        <p class="learn">
+          Jetzt arbeitet ihr zu zweit an einem Text, einer Mail oder einer Tabelle.
+          Du gibst die Richtung, der Agent schreibt mit — und du änderst, bis es stimmt.
+        </p>
+        <ul class="cats">
+          <li class="cat">
+            <div class="cat-head">
+              <span class="cat-name">Office-Assistenten</span>
+              <span class="badge">leicht</span>
+            </div>
+            <p><strong>Wofür:</strong> Hilft direkt in Mail, Dokumenten und Tabellen.</p>
+            <p class="examples"><strong>Beispiele:</strong> Microsoft Copilot, Gemini in Google Workspace</p>
+          </li>
+          <li class="cat">
+            <div class="cat-head">
+              <span class="cat-name">Sprach- und Notiz-Agenten</span>
+              <span class="badge">leicht</span>
+            </div>
+            <p><strong>Wofür:</strong> Nimmt Gespräche auf, schreibt mit und fasst das Wichtige zusammen.</p>
+            <p class="examples"><strong>Beispiele:</strong> Plaud, Otter</p>
+          </li>
+        </ul>
+        <div class="task">
+          <p class="task-label"><span aria-hidden="true">&#9998;</span> Auftrag zum Kopieren</p>
+          <p class="task-text" id="auftrag-2">Zeig mir zuerst deinen Plan und warte auf mein OK.
+
+Ziel: Mach aus meinen Stichpunkten einen kurzen Entwurf für eine E-Mail.
+Kontext: Es geht um einen Terminvorschlag an ein kleines Team. Ton freundlich und knapp.
+Grenzen: Nicht abschicken. Keine erfundenen Termine, Namen oder Zahlen.
+Fertig, wenn: Ein Entwurf dasteht, den ich nur noch prüfen und ändern muss.
+Bei Unklarheit: Erfinde nichts. Schreib „unbekannt“ oder frag mich.</p>
+          <button class="btn copy-btn" type="button" data-copy="auftrag-2">Auftrag kopieren</button>
+          <span class="copied-note" role="status" aria-live="polite"></span>
+        </div>
+      </article>
+
+      <!-- Stufe 3 -->
+      <article class="step s3 reveal" id="stufe-3" aria-labelledby="stufe-3-titel">
+        <div class="step-head">
+          <span class="step-num" aria-hidden="true">3</span>
+          <div>
+            <h3 id="stufe-3-titel">Beauftragen</h3>
+            <span class="step-tag">Stufe 3 von 4</span>
+          </div>
+        </div>
+        <p class="learn">
+          Jetzt gibst du einen Auftrag, der aus mehreren Schritten besteht. Der Agent sucht, liest
+          und klickt sich durch — und du bekommst ein Ergebnis. Genau hier hilft dir der Auftrag
+          in fünf Teilen von oben.
+        </p>
+        <ul class="cats">
+          <li class="cat">
+            <div class="cat-head">
+              <span class="cat-name">Recherche-Agenten</span>
+              <span class="badge">leicht</span>
+            </div>
+            <p><strong>Wofür:</strong> Sucht im Netz, liest viele Quellen und fasst sie mit Quellenangaben zusammen.</p>
+            <p class="examples"><strong>Beispiele:</strong> Perplexity, Deep Research in ChatGPT, Deep Research in Gemini</p>
+          </li>
+          <li class="cat">
+            <div class="cat-head">
+              <span class="cat-name">Browser-Agenten</span>
+              <span class="badge badge-mid">mittel</span>
+            </div>
+            <p><strong>Wofür:</strong> Klickt sich selbst durch Webseiten und erledigt Aufgaben für dich.</p>
+            <p class="examples"><strong>Beispiele:</strong> ChatGPT Agent, Claude in Chrome</p>
+          </li>
+        </ul>
+        <div class="task">
+          <p class="task-label"><span aria-hidden="true">&#9998;</span> Auftrag zum Kopieren</p>
+          <p class="task-text" id="auftrag-3">Zeig mir zuerst deinen Plan und warte auf mein OK.
+
+Ziel: Finde heraus, ob meine Stadt eine Förderung für Balkonkraftwerke hat, und fasse sie in fünf Punkten zusammen.
+Kontext: Ich wohne zur Miete. Das Ergebnis soll auf eine halbe Seite passen.
+Grenzen: Nur Seiten von Stadt, Land oder Bund. Keine Foren. Nichts anmelden, nichts kaufen.
+Fertig, wenn: Fünf Punkte mit je einer Quelle dastehen.
+Bei Unklarheit: Erfinde nichts. Schreib „unbekannt“ oder frag mich.</p>
+          <button class="btn copy-btn" type="button" data-copy="auftrag-3">Auftrag kopieren</button>
+          <span class="copied-note" role="status" aria-live="polite"></span>
+        </div>
+      </article>
+
+      <!-- Stufe 4 -->
+      <article class="step s4 reveal" id="stufe-4" aria-labelledby="stufe-4-titel">
+        <div class="step-head">
+          <span class="step-num" aria-hidden="true">4</span>
+          <div>
+            <h3 id="stufe-4-titel">Abnehmen</h3>
+            <span class="step-tag">Stufe 4 von 4</span>
+          </div>
+        </div>
+        <p class="learn">
+          Auf der letzten Stufe läuft etwas ohne dich: ein Ablauf, der immer wiederkehrt.
+          Deine Aufgabe ist jetzt das Abnehmen. Du prüfst stichprobenartig, ob es stimmt,
+          und gibst frei — oder schickst den Agenten zurück.
+        </p>
+        <ul class="cats">
+          <li class="cat">
+            <div class="cat-head">
+              <span class="cat-name">Automatisierungs-Agenten</span>
+              <span class="badge badge-mid">mittel</span>
+            </div>
+            <p><strong>Wofür:</strong> Verbindet deine Apps und erledigt wiederkehrende Abläufe.</p>
+            <p class="examples"><strong>Beispiele:</strong> Zapier Agents, n8n</p>
+          </li>
+        </ul>
+        <div class="task">
+          <p class="task-label"><span aria-hidden="true">&#9998;</span> Auftrag zum Kopieren</p>
+          <p class="task-text" id="auftrag-4">Zeig mir zuerst deinen Plan und warte auf mein OK.
+
+Ziel: Stell mir jeden Morgen ein kurzes Briefing zu meinem Thema zusammen, das ich freigebe.
+Kontext: Erst nur lesen und sammeln. Es passiert nichts, bevor ich es abgenommen habe.
+Grenzen: Keine Mails senden, nichts kaufen, nichts löschen. Nur Entwürfe und Listen.
+Fertig, wenn: Ein Entwurf mit Quellen dasteht, den ich prüfen und freigeben kann.
+Bei Unklarheit: Erfinde nichts. Schreib „unbekannt“ oder frag mich.</p>
+          <button class="btn copy-btn" type="button" data-copy="auftrag-4">Auftrag kopieren</button>
+          <span class="copied-note" role="status" aria-live="polite"></span>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="note">Beispiele, keine Werbung. Stand: September 2026.</p>
+  </section>
+
+  <!-- Sicherheitsregeln -->
+  <section class="wrap" aria-labelledby="sicherer-start">
+    <div class="reveal">
+      <h2 id="sicherer-start">Drei Regeln für den sicheren Start</h2>
+      <p class="section-lede">
+        Agenten machen Fehler. Deshalb prüfst du. Diese drei Regeln gelten auf jeder Stufe
+        und sind in jedem Auftrag oben schon eingebaut.
+      </p>
+    </div>
+    <ul class="care-list">
+      <li class="care reveal">
+        <span class="care-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h10"/></svg>
+        </span>
+        <h3>Erst der Plan</h3>
+        <p>Sag: „Zeig mir zuerst deinen Plan und warte auf mein OK.“ So siehst du vorher, was der Agent vorhat, und kannst noch eingreifen.</p>
+      </li>
+      <li class="care reveal">
+        <span class="care-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+        </span>
+        <h3>Stichprobe</h3>
+        <p>Prüfe drei Zahlen oder Zitate an der Originalquelle. Vertrauen entsteht durch Nachschauen, nicht durch Glauben.</p>
+      </li>
+      <li class="care reveal">
+        <span class="care-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3l14 8-6 2-2 6-6-16z"/><path d="M14 14l5 5"/></svg>
+        </span>
+        <h3>Letzter Klick bei dir</h3>
+        <p>Erst nur lesen lassen, dann nur Entwürfe. Senden, Kaufen und Löschen machst du selbst.</p>
+      </li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <div>
+      <p class="foot-brand">agentfähig.de · ein Einstieg vor HAI</p>
+      <p class="foot-note">Eine ruhige Einführung für alle, die zum ersten Mal bewusst mit KI-Agenten arbeiten.</p>
+    </div>
+    <ul class="foot-links">
+      <li><a href="https://human-agent-interface.com">HAI</a></li>
+      <li><a href="#">Impressum</a></li>
+      <li><a href="#">Datenschutz</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    'use strict';
+
+    /* Sicherheitsnetz: Wenn irgendetwas schiefgeht, bleibt nichts versteckt. */
+    function revealAll() {
+      var all = document.querySelectorAll('.reveal');
+      for (var k = 0; k < all.length; k++) { all[k].classList.add('in'); }
+    }
+
+    try {
+      /* Sanftes Einblenden beim Scrollen — respektiert prefers-reduced-motion */
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var items = document.querySelectorAll('.reveal');
+
+      if (reduce || !('IntersectionObserver' in window)) {
+        revealAll();
+      } else {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { rootMargin: '0px 0px -40px 0px', threshold: 0.12 });
+
+        items.forEach(function (el) { observer.observe(el); });
+      }
+    } catch (err) {
+      revealAll();
+    }
+
+    /* Auftrag kopieren */
+    function copyText(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(text);
+      }
+      return new Promise(function (resolve, reject) {
+        var area = document.createElement('textarea');
+        area.value = text;
+        area.setAttribute('readonly', '');
+        area.style.position = 'fixed';
+        area.style.top = '-1000px';
+        document.body.appendChild(area);
+        area.select();
+        try {
+          var ok = document.execCommand('copy');
+          document.body.removeChild(area);
+          ok ? resolve() : reject(new Error('copy failed'));
+        } catch (err) {
+          document.body.removeChild(area);
+          reject(err);
+        }
+      });
+    }
+
+    document.querySelectorAll('.copy-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var target = document.getElementById(btn.getAttribute('data-copy'));
+        if (!target) { return; }
+        var note = btn.parentNode.querySelector('.copied-note');
+        var text = target.textContent.trim();
+
+        copyText(text).then(function () {
+          if (note) { note.textContent = 'Kopiert!'; }
+          var original = btn.textContent;
+          btn.textContent = 'Kopiert';
+          window.setTimeout(function () {
+            btn.textContent = original;
+            if (note) { note.textContent = ''; }
+          }, 2500);
+        }).catch(function () {
+          if (note) { note.textContent = 'Bitte markiere den Text und kopiere ihn von Hand.'; }
+        });
+      });
+    });
+  })();
+</script>
+</body>
+</html>

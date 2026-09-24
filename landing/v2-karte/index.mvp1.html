@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Welcher KI-Agent passt zu dir? — agentfähig.de</title>
+<meta name="description" content="Die Agenten-Karte: sechs Kategorien von KI-Agenten im Überblick. Einfach erklärt, zum Nachschlagen, für Einsteiger.">
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --surface: #ffffff;
+    --ink: #16181d;
+    --ink-soft: #4a4f59;
+    --line: #d9dde4;
+    --line-strong: #b6bcc7;
+    --focus: #111318;
+    --badge-leicht-bg: #e6f4ea;
+    --badge-leicht-ink: #14532d;
+    --badge-mittel-bg: #fdf0dc;
+    --badge-mittel-ink: #7a4300;
+    --chip-bg: #eef0f4;
+    --chip-ink: #33373f;
+    --radius: 14px;
+    --maxw: 1080px;
+    --shadow: 0 1px 0 rgba(20, 22, 28, .04), 0 6px 20px rgba(20, 22, 28, .06);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101216;
+      --surface: #191c22;
+      --ink: #f2f4f8;
+      --ink-soft: #b3b9c4;
+      --line: #2e333d;
+      --line-strong: #454b57;
+      --focus: #ffffff;
+      --badge-leicht-bg: #103322;
+      --badge-leicht-ink: #8fe3b0;
+      --badge-mittel-bg: #3a2a10;
+      --badge-mittel-ink: #f2c078;
+      --chip-bg: #23272f;
+      --chip-ink: #d7dbe3;
+      --shadow: 0 1px 0 rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .35);
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background-color: var(--bg);
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 48px 48px;
+    background-position: -1px -1px;
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.55;
+    font-size: 17px;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 22px 16px 0;
+  }
+
+  a { color: inherit; }
+
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 14px 0 6px;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: .78rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--ink-soft);
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    padding: 3px 12px;
+    background: var(--surface);
+    margin: 0 0 14px;
+  }
+
+  h1 {
+    font-size: clamp(1.65rem, 6.5vw, 2.6rem);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    margin: 0 0 10px;
+    text-wrap: balance;
+  }
+
+  .lede {
+    margin: 0 0 18px;
+    color: var(--ink-soft);
+    max-width: 62ch;
+    font-size: 1.02rem;
+  }
+
+  /* ---------- Filter ---------- */
+  .filters {
+    margin: 0 0 8px;
+    padding: 14px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .filters-label {
+    font-size: .82rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 10px;
+  }
+
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .filter-btn {
+    font: inherit;
+    font-size: .92rem;
+    line-height: 1.2;
+    cursor: pointer;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1.5px solid var(--line-strong);
+    border-radius: 999px;
+    padding: 8px 14px;
+    min-height: 40px;
+  }
+
+  .filter-btn:hover { background: var(--chip-bg); }
+
+  .filter-btn[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+    font-weight: 600;
+  }
+
+  .filter-status {
+    margin: 12px 0 0;
+    font-size: .88rem;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Grid ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin: 20px 0 8px;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 620px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (min-width: 960px) {
+    .grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .card {
+    --cat: #1d4ed8;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-top: 5px solid var(--cat);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 16px 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card[hidden] { display: none; }
+
+  .card-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .icon {
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    color: var(--cat);
+    background: color-mix(in srgb, var(--cat) 12%, transparent);
+  }
+
+  .icon svg { width: 24px; height: 24px; display: block; }
+
+  .card-title {
+    margin: 0;
+    font-size: 1.12rem;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+
+  .badge {
+    margin-left: auto;
+    flex: 0 0 auto;
+    font-size: .74rem;
+    font-weight: 700;
+    letter-spacing: .03em;
+    border-radius: 999px;
+    padding: 3px 10px;
+    white-space: nowrap;
+  }
+
+  .badge-leicht { background: var(--badge-leicht-bg); color: var(--badge-leicht-ink); }
+  .badge-mittel { background: var(--badge-mittel-bg); color: var(--badge-mittel-ink); }
+
+  .wofuer {
+    margin: 0;
+    color: var(--ink);
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .chips li {
+    font-size: .8rem;
+    background: var(--chip-bg);
+    color: var(--chip-ink);
+    border-radius: 6px;
+    padding: 3px 9px;
+  }
+
+  details {
+    margin-top: auto;
+    border-top: 1px dashed var(--line-strong);
+    padding-top: 8px;
+  }
+
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: .95rem;
+    color: var(--cat);
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 34px;
+  }
+
+  summary::-webkit-details-marker { display: none; }
+
+  summary::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-right: 2.5px solid currentColor;
+    border-bottom: 2.5px solid currentColor;
+    transform: rotate(-45deg);
+    transition: transform .15s ease;
+    flex: 0 0 auto;
+  }
+
+  details[open] summary::before { transform: rotate(45deg); }
+
+  details p {
+    margin: 8px 0 0;
+    font-size: .93rem;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Agent-Erklärung ---------- */
+  .explain {
+    margin: 26px 0;
+    padding: 18px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 5px solid var(--ink);
+    border-radius: var(--radius);
+  }
+
+  .explain h2 {
+    margin: 0 0 8px;
+    font-size: 1.12rem;
+  }
+
+  .explain p {
+    margin: 0;
+    max-width: 70ch;
+    color: var(--ink-soft);
+  }
+
+  .note {
+    margin: 0 0 22px;
+    font-size: .82rem;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Abschluss-Band ---------- */
+  .cta {
+    background: var(--ink);
+    color: var(--bg);
+    border-radius: var(--radius);
+    padding: 22px 18px;
+    margin: 0 0 26px;
+  }
+
+  .cta h2 {
+    margin: 0 0 6px;
+    font-size: 1.25rem;
+    color: var(--bg);
+    line-height: 1.25;
+  }
+
+  .cta p { margin: 0 0 14px; color: var(--bg); opacity: .82; max-width: 62ch; }
+
+  .cta a {
+    display: inline-block;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--bg);
+    border-radius: 999px;
+    padding: 10px 18px;
+    min-height: 42px;
+  }
+
+  .cta a:hover { text-decoration: underline; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 18px 0 34px;
+    font-size: .88rem;
+    color: var(--ink-soft);
+  }
+
+  .foot-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    align-items: center;
+  }
+
+  footer a { text-decoration: underline; }
+
+  @media (prefers-reduced-motion: reduce) {
+    summary::before { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">Die Agenten-Karte</p>
+    <h1>Welcher KI-Agent passt zu dir?</h1>
+    <p class="lede">Sechs Sorten KI-Agenten, einfach erklärt. Such dir aus, was zu deinem Alltag passt — und probier den ersten Auftrag direkt aus.</p>
+  </header>
+
+  <section class="filters" aria-label="Agenten filtern">
+    <p class="filters-label" id="filter-label">Wonach suchst du?</p>
+    <div class="filter-row" role="group" aria-labelledby="filter-label">
+      <button type="button" class="filter-btn" data-filter="alle" aria-pressed="true">Alle</button>
+      <button type="button" class="filter-btn" data-filter="leicht" aria-pressed="false">Leicht für den Einstieg</button>
+      <button type="button" class="filter-btn" data-filter="schreiben" aria-pressed="false">Ich schreibe viel</button>
+      <button type="button" class="filter-btn" data-filter="infos" aria-pressed="false">Ich suche Infos</button>
+      <button type="button" class="filter-btn" data-filter="meetings" aria-pressed="false">Ich habe viele Meetings</button>
+      <button type="button" class="filter-btn" data-filter="wiederholen" aria-pressed="false">Ich mache Dinge immer wieder gleich</button>
+    </div>
+    <p class="filter-status" id="filter-status" aria-live="polite">Alle 6 Kategorien sichtbar.</p>
+  </section>
+
+  <main>
+    <ul class="grid" id="grid">
+
+      <li class="card" data-tags="leicht schreiben" style="--cat:#1d4ed8">
+        <div class="card-head">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 5h16v11H9l-5 4z"/>
+              <path d="M8 9h8M8 12.5h5"/>
+            </svg>
+          </span>
+          <h2 class="card-title">Chat-Assistenten</h2>
+          <span class="badge badge-leicht">leicht</span>
+        </div>
+        <p class="wofuer">Wofür: Du stellst Fragen, lässt dir etwas erklären oder schreibst Texte.</p>
+        <ul class="chips">
+          <li>ChatGPT</li><li>Claude</li><li>Gemini</li>
+        </ul>
+        <details>
+          <summary>So fängst du an</summary>
+          <p>Schreib in ChatGPT: „Erklär mir in drei Sätzen, wie ein Kühlschrank funktioniert." Dann frag nach: „Und noch einfacher, als wäre ich zehn." So merkst du sofort, wie das Gespräch läuft.</p>
+        </details>
+      </li>
+
+      <li class="card" data-tags="leicht infos" style="--cat:#0f766e">
+        <div class="card-head">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="10.5" cy="10.5" r="6.5"/>
+              <path d="M15.5 15.5 21 21"/>
+              <path d="M8 10.5h5M10.5 8v5"/>
+            </svg>
+          </span>
+          <h2 class="card-title">Recherche-Agenten</h2>
+          <span class="badge badge-leicht">leicht</span>
+        </div>
+        <p class="wofuer">Wofür: Sucht im Netz, liest viele Seiten und fasst das Wichtigste mit Quellen zusammen.</p>
+        <ul class="chips">
+          <li>Perplexity</li><li>Deep Research in ChatGPT</li><li>Deep Research in Gemini</li>
+        </ul>
+        <details>
+          <summary>So fängst du an</summary>
+          <p>Frag Perplexity: „Was ist der Unterschied zwischen Wetter und Klima? Mit Quellen." Klick danach eine der Quellen an — so siehst du, woher die Antwort kommt.</p>
+        </details>
+      </li>
+
+      <li class="card" data-tags="leicht schreiben meetings" style="--cat:#6d28d9">
+        <div class="card-head">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="7" width="18" height="13" rx="2"/>
+              <path d="M3 11h18M7 7V4h10v3"/>
+              <path d="M8 15h4"/>
+            </svg>
+          </span>
+          <h2 class="card-title">Office-Assistenten</h2>
+          <span class="badge badge-leicht">leicht</span>
+        </div>
+        <p class="wofuer">Wofür: Hilft dir direkt in Mail, Dokumenten und Tabellen.</p>
+        <ul class="chips">
+          <li>Microsoft Copilot</li><li>Gemini in Google Workspace</li>
+        </ul>
+        <details>
+          <summary>So fängst du an</summary>
+          <p>Lass dir in deinem Mail-Programm eine kurze, freundliche Antwort auf eine echte E-Mail vorschlagen. Lies sie durch und ändere sie nach deinem Geschmack, bevor du sie sendest.</p>
+        </details>
+      </li>
+
+      <li class="card" data-tags="leicht meetings" style="--cat:#b45309">
+        <div class="card-head">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="3" width="6" height="11" rx="3"/>
+              <path d="M5.5 11a6.5 6.5 0 0 0 13 0"/>
+              <path d="M12 17.5V21M8.5 21h7"/>
+            </svg>
+          </span>
+          <h2 class="card-title">Sprach- und Notiz-Agenten</h2>
+          <span class="badge badge-leicht">leicht</span>
+        </div>
+        <p class="wofuer">Wofür: Nimmt Gespräche auf, schreibt mit und fasst danach das Wichtigste zusammen.</p>
+        <ul class="chips">
+          <li>Plaud</li><li>Otter</li>
+        </ul>
+        <details>
+          <summary>So fängst du an</summary>
+          <p>Nimm ein kurzes Gespräch mit dir selbst auf und lass dir daraus eine Liste von Aufgaben machen. Vergleiche die Zusammenfassung mit dem, was du wirklich gesagt hast.</p>
+        </details>
+      </li>
+
+      <li class="card" data-tags="mittel infos wiederholen" style="--cat:#be123c">
+        <div class="card-head">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="16" rx="2"/>
+              <path d="M3 9h18"/>
+              <circle cx="8" cy="14" r="0.6" fill="currentColor"/>
+              <circle cx="12" cy="14" r="0.6" fill="currentColor"/>
+              <circle cx="16" cy="14" r="0.6" fill="currentColor"/>
+            </svg>
+          </span>
+          <h2 class="card-title">Browser-Agenten</h2>
+          <span class="badge badge-mittel">mittel</span>
+        </div>
+        <p class="wofuer">Wofür: Klickt sich selbst durch Webseiten und erledigt Aufgaben Schritt für Schritt.</p>
+        <ul class="chips">
+          <li>ChatGPT Agent</li><li>Claude in Chrome</li>
+        </ul>
+        <details>
+          <summary>So fängst du an</summary>
+          <p>Gib eine Aufgabe, die du sowieso machst: „Such mir drei passende Angebote für X und zeig sie übersichtlich." Schau bei jedem Schritt nach, was der Agent gerade tut — und stoppe ihn, wenn dir etwas komisch vorkommt.</p>
+        </details>
+      </li>
+
+      <li class="card" data-tags="mittel wiederholen" style="--cat:#15803d">
+        <div class="card-head">
+          <span class="icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 7h7l2-2h7v14H4z"/>
+              <path d="M8 12h8M8 15.5h5"/>
+              <path d="M4 10h16"/>
+            </svg>
+          </span>
+          <h2 class="card-title">Automatisierungs-Agenten</h2>
+          <span class="badge badge-mittel">mittel</span>
+        </div>
+        <p class="wofuer">Wofür: Verbindet Apps und erledigt wiederkehrende Abläufe von allein.</p>
+        <ul class="chips">
+          <li>Zapier Agents</li><li>n8n</li>
+        </ul>
+        <details>
+          <summary>So fängst du an</summary>
+          <p>Verbinde zwei Apps mit einer einzigen Regel, zum Beispiel: „Neue Aufgabe in App A → Nachricht an mich in App B." Teste sie einmal mit einer echten Aufgabe und schau, ob die Nachricht ankommt.</p>
+        </details>
+      </li>
+
+    </ul>
+
+    <p class="note">Beispiele, keine Werbung. Stand: September 2026.</p>
+
+    <section class="explain" aria-labelledby="explain-title">
+      <h2 id="explain-title">Was ist ein Agent überhaupt?</h2>
+      <p>Ein Agent ist ein KI-Programm, das nicht nur antwortet, sondern auch Schritte für dich erledigt. Du gibst ihm ein Ziel in normaler Sprache, zum Beispiel: „Fass mir das zusammen." Der Agent plant dann selbst, was er dafür tun muss, und führt es aus — bei den einfachen Varianten noch gemeinsam mit dir.</p>
+    </section>
+
+    <section class="cta" aria-labelledby="cta-title">
+      <h2 id="cta-title">Du hast deinen Agenten gefunden?</h2>
+      <p>HAI hilft dir, ihn im Griff zu behalten: Aufgaben klar geben, Ergebnisse prüfen, dranbleiben.</p>
+      <a href="https://human-agent-interface.com">Zu HAI</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot-row">
+      <span>agentfähig.de · ein Einstieg vor HAI</span>
+      <a href="https://human-agent-interface.com">HAI</a>
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutz</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var buttons = document.querySelectorAll(".filter-btn");
+    var cards = document.querySelectorAll(".card");
+    var status = document.getElementById("filter-status");
+
+    function apply(filter) {
+      var shown = 0;
+      cards.forEach(function (card) {
+        var tags = (card.getAttribute("data-tags") || "").split(/\s+/);
+        var match = filter === "alle" || tags.indexOf(filter) !== -1;
+        card.hidden = !match;
+        if (match) { shown += 1; }
+      });
+      if (filter === "alle") {
+        status.textContent = "Alle " + shown + " Kategorien sichtbar.";
+      } else if (shown === 0) {
+        status.textContent = "Keine Kategorie passt zu diesem Filter.";
+      } else {
+        status.textContent = shown + " von " + cards.length + " Kategorien passen zu diesem Filter.";
+      }
+    }
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        buttons.forEach(function (b) {
+          b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+        });
+        apply(btn.getAttribute("data-filter"));
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
