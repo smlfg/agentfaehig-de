@@ -1,0 +1,54 @@
+# ===== OS / Editor =====
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# ===== Secrets / Lokal-Config (nie committen) =====
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# ===== Logs / Runtime =====
+*.log
+logs/
+.cache/
+.tmp/
+
+# ===== Build-Outputs (stack-agnostisch, fuer spaeter) =====
+dist/
+build/
+out/
+.next/
+.nuxt/
+.svelte-kit/
+.astro/
+.docusaurus/
+.turbo/
+.vercel/
+
+# ===== Dependencies =====
+node_modules/
+.pnpm-store/
+.yarn/cache/
+
+# ===== Python / Virtuelle Envs =====
+.venv/
+venv/
+__pycache__/
+*.pyc
+.mypy_cache/
+.pytest_cache/
+
+# ===== IDE / Tooling =====
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# ===== Hermes / Claude-Local =====
+.claude/settings.local.json
