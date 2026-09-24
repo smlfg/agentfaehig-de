@@ -9,25 +9,21 @@ Du hast eine Domain gekauft und einen klaren Zweck dafür: Menschen fähig mache
 - Ohne Sprach-Entscheidung ist Site-Stack-Wahl verschwendete Vorarbeit.
 
 ## Smallest next step
-**Eine Entscheidungsdatei `Projek-Managment/DECISIONS_2026-09-25.md` schreiben** — sie enthält für genau zwei Fragen je eine Zeile Antwort + 1-Satz-Begründung:
-- **Z1 Zielgruppe:** *(eine der fünf: Endnutzer / Knowledge Worker / Entscheider / Builder / Treppe-intern)*
-- **Z2 Sprache:** *(DE einfach / DE technisch / DE+EN)*
+**Kuratierte Agenten-Karte schreiben** als `Projek-Managment/AGENT_MAP_2026-09-25.md` — Inhaltsfundament der Site.
 
-Format-Beispiel:
-```
-Z1 Zielgruppe: Knowledge Worker (Büroleute, die mit Outlook/CRM/Reporting arbeiten). Begründung: größte DE-Zielgruppe mit konkretem Use-Case, nicht zu technisch, nicht zu abstrakt.
-Z2 Sprache: DE einfach (Erklär-Modus für Einsteiger). Begründung: agentfähig.de ist Onboarding, nicht Showcase — einfache Sprache schlägt Insider-Slang.
-```
+Filter:
+- **Zielgruppe:** Menschen, die noch nie mit Agenten gearbeitet haben (echte Einsteiger, Otto-Normalnutzer, kein Vorwissen über KI-Agenten).
+- **Sprache:** Deutsch, einfache Sprache (Erklär-Modus).
+- **Tiefe:** 5-7 Kategorien × 2-3 prominente Beispiele × 1 Satz Use-Case + Eignung für Einsteiger. Keine vollständige Marktliste.
+- **Format:** Tabelle oder strukturierte Liste, max. 2 Bildschirmseiten.
 
-Danach: nichts. Warten auf deine Entscheidung.
+Was NICHT rein darf: Framework-/Plattform-Layer (LangGraph, CrewAI, AutoGen) — das ist für Entwickler, nicht für Einsteiger. Coding-Agents (Claude Code, Codex, Cursor, Aider) sind Grenzfall — erst nach Samuel-Entscheidung rein oder raus.
 
 ## Recommended default
-Wenn du jetzt nicht entscheiden willst: ich setze **[ANNAHME] Z1 = Knowledge Worker, Z2 = DE einfach** in die Datei. Du kannst sie beim Review mit einem Wort kippen.
-
-**Konsequenz bei Annahme:** Die nächste Datei wird `Projek-Managment/AGENT_MAP_2026-09-25.md` — eine kuratierte 5-7-Kategorien-Map mit je 2-3 prominenten Beispielen, gefiltert auf Knowledge Worker (Outlook, CRM, Reporting, Suche, Dokumente). Tiefe: pro Agent 1 Satz Use-Case + Eignung. Maximal 2 Bildschirmseiten.
+Die zwei Entscheidungen (Zielgruppe + Sprache) sind getroffen. Nächster Schritt ist die `AGENT_MAP`. Ich schlage die Kategorien-Reihenfolge + Beispielauswahl vor, Samuel kippt was er nicht will.
 
 ## If Samuel does not object
-Die zwei Annahmen (Z1 = Knowledge Worker, Z2 = DE einfach) werden kanonisch. Nächster Schritt wird die kuratierte Agenten-Map. Erst danach: Site-Stack, Site-MVP, Deploy.
+Die Karte wird Inhaltsfundament. Daraus folgt die Site-Sektionen-Reihenfolge = Kategorien-Reihenfolge. Danach: Site-Stack, Site-MVP, Deploy.
 
 ## Not included
 - Keine vollständige Marktliste (veraltet täglich).

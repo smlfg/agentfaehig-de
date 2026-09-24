@@ -31,11 +31,14 @@ Das Projekt liefert drei Dinge in dieser Reihenfolge:
 5. **Site-MVP** — eine statische Seite (oder kleines Framework) umsetzen, die die Map zeigt und sauber nach HAI verlinkt
 6. **HAI-Cross-Link verifizieren** — ist der Weg vom Eintritt zur Kontrollebene sichtbar?
 
+## Entscheidungen (getroffen 2026-09-25)
+- **Z1 Zielgruppe:** Menschen, die noch nie mit Agenten gearbeitet haben (echte Einsteiger, Otto-Normalnutzer, kein Vorwissen über KI-Agenten).
+- **Z2 Sprache:** Deutsch — einfache Sprache (Erklär-Modus), konsistent mit `.de`-Domain und Onboarding-Treppe.
+
 ## Offene Fragen (an Samuel)
-- **Q1 Zielgruppe:** Endnutzer, Knowledge Worker, Entscheider, Builder, oder Treppe-intern?
-- **Q2 Sprache:** DE einfach / DE technisch / DE+EN?
-- **Q3 Tiefe der Karte:** nur Kategorien + 2-3 Beispiele, oder pro Agent 1-Satz-Beschreibung + Use-Case-Tag?
-- **Q4 Update-Mechanik:** Wie bleibt die Karte aktuell, ohne dass sie täglich gepflegt werden muss? (RSS, manuelle Quartals-Refresh, "letzter Check: Datum"-Footer?)
+- **Q1 Tiefe der Karte:** nur Kategorien + 2-3 Beispiele, oder pro Agent 1-Satz-Beschreibung + Use-Case-Tag?
+- **Q2 Coding-Agents drin oder raus?** Claude Code / Codex / Cursor / Aider sind für die Zielgruppe wahrscheinlich zu spezifisch — gehören sie trotzdem als eigene Kategorie rein (weil sie der sichtbarste Agent-Trend sind) oder raus (weil sie Otto-Normalnutzer überfordern)?
+- **Q3 Update-Mechanik:** Wie bleibt die Karte aktuell, ohne dass sie täglich gepflegt werden muss? (RSS, manuelle Quartals-Refresh, "letzter Check: Datum"-Footer?)
 
 ## Completion/Lifecycle
 Aktuell: **ACTIVE_BUILD** (Roh-Idee vorhanden, kein Code, keine Site, keine Inhalte).

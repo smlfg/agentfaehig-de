@@ -34,4 +34,6 @@
 - `humanagentinterface.de` Rolle im DACH-Markt — separates Projekt, gleicher Kontext, eigene Entscheidung.
 
 ## Frage an Samuel
-**Zielgruppe + Sprache:** Wer genau soll hier den Eintritt schaffen, und in welcher Sprache? Eine Antwort pro Punkt — dann minimisiere ich auf den nächsten konkreten Schritt.
+**Coding-Agents rein oder raus in die Karte?** Claude Code, Codex, Cursor, Aider sind der sichtbarste Trend — gehören sie als eigene Kategorie in die Einsteiger-Karte, oder sind sie für "noch nie mit Agenten gearbeitet" zu spezifisch und überfordernd? Eine Antwort reicht.
+
+(Inhaltliche Entscheidungen Zielgruppe + Sprache sind getroffen: echte Einsteiger, DE einfach.)
