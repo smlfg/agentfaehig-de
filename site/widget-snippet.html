@@ -10,6 +10,7 @@
   .explain-log p { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
   .explain-log .q { color: var(--ink-soft); font-style: italic; }
   .explain-log .hint { color: var(--ink-faint); font-size: 0.86rem; }
+  .explain-log .hint a { color: inherit; text-decoration: underline; }
   .explain-form { display: flex; gap: 8px; padding: 10px; border-top: 1px solid var(--line); }
   .explain-form input { flex: 1; min-width: 0; padding: 10px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--paper-deep); color: var(--ink); font-family: inherit; font-size: 1rem; }
   .explain-form button { padding: 10px 14px; border: 0; border-radius: 8px; background: var(--ink); color: var(--paper); font-family: inherit; font-size: 1rem; font-weight: 600; cursor: pointer; }
@@ -20,8 +21,7 @@
   <div class="explain-head"><span>Erklär-Agent</span><button class="explain-close" id="explainClose" type="button" aria-label="Schließen">×</button></div>
   <div class="explain-log" id="explainLog" aria-live="polite">
     <p>Ich bin ein Agent und erkläre dir diese Seite. Frag einfach, z. B. „Welcher Agent hilft mir bei einer Mail?“</p>
-    <!-- PRÜFEN: Link auf die Datenschutzerklärung ergänzen, sobald es sie gibt (heute zeigt „Datenschutz“ im Fuß auf „#“). -->
-    <p class="hint">Ich bin eine KI. Ich antworte nur aus den Inhalten dieser Seite und kann mich irren. Deine Frage wird dafür an einen Server geschickt. Bitte keine persönlichen Daten eingeben.</p>
+    <p class="hint">Ich bin eine KI. Ich antworte nur aus den Inhalten dieser Seite und kann mich irren. Deine Frage wird dafür an einen Server geschickt. Bitte keine persönlichen Daten eingeben. <a href="https://www.human-agent-interface.com/datenschutz/" rel="noopener">Datenschutz</a></p>
   </div>
   <form class="explain-form" id="explainForm">
     <input id="explainInput" maxlength="500" autocomplete="off" placeholder="Deine Frage" aria-label="Deine Frage" required>

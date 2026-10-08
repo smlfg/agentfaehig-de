@@ -52,16 +52,22 @@ test("ohne Service Binding: 503 statt Fehler; Seite selbst kommt weiter aus den 
   assert.equal(await (await worker.fetch(new Request("https://xn--agentfhig-02a.de/fonts/caveat.woff2"), e)).text(), "asset:/fonts/caveat.woff2");
 });
 
-test("index.html = Live-Stand + genau zwei Änderungen (Satz zu 'Nichts wird gesendet' + Widget)", () => {
+test("index.html = Live-Stand + freigegebene Änderungen (Satz, Impressum/Datenschutz-Links, Widget)", () => {
   const live = readFileSync(new URL("../reference/index.live-2026-10-08.html", import.meta.url), "utf8");
   const cur = readFileSync(new URL("../public/index.html", import.meta.url), "utf8");
   const snip = readFileSync(new URL("../widget-snippet.html", import.meta.url), "utf8");
-  const expected = live.replace("Nichts wird gesendet.", "Die Kacheln senden nichts.").replace("</body>", snip + "\n</body>");
+  const expected = live
+    .replace("Nichts wird gesendet.", "Die Kacheln senden nichts.")
+    .replace('<a href="#">Impressum', '<a href="https://www.human-agent-interface.com/impressum/">Impressum')
+    .replace('<a href="#">Datenschutz', '<a href="https://www.human-agent-interface.com/datenschutz/">Datenschutz')
+    .replace("</body>", snip + "\n</body>");
   assert.equal(cur, expected);
   assert.ok(!cur.includes("Nichts wird gesendet."));
+  assert.ok(!cur.includes('href="#"'), "keine toten #-Links mehr");
   // Widget: nur relative Same-Origin-Aufrufe, kein innerHTML, KI-Hinweis sichtbar
   assert.ok(!/innerHTML/.test(snip));
-  assert.ok(!/https?:\/\//.test(snip.replace(/<!--[\s\S]*?-->/g, "")), "keine externen URLs im Widget");
+  const urls = snip.replace(/<!--[\s\S]*?-->/g, "").match(/https?:\/\/[^"'\s<]+/g) || [];
+  assert.deepEqual(urls, ["https://www.human-agent-interface.com/datenschutz/"], "einzige externe URL im Widget: Datenschutz-Link");
   assert.match(snip, /fetch\("\/api\/explain\/"/);
   assert.match(snip, /Ich bin eine KI/);
   assert.match(snip, /aria-expanded/);
