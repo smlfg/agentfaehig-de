@@ -1,0 +1,19 @@
+// agentfähig.de (Worker "agentfaehig"). Bisher reiner Assets-Worker ohne Code.
+// Neu: kleiner Worker nur für /api/* (Erklär-Agent per Service Binding), sonst unverändert Assets.
+// KEINE routes hier: die bestehenden Custom Domains (xn--agentfhig-02a.de, www.xn--agentfhig-02a.de)
+// bleiben, wie sie sind. Vor dem Deploy prüfen (siehe README).
+{
+  "name": "agentfaehig",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-09-25",
+  "workers_dev": true,
+  "assets": {
+    "directory": "public",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "services": [
+    { "binding": "EXPLAIN", "service": "cwh-11-explain-20261008" }
+  ],
+  "observability": { "enabled": true }
+}
