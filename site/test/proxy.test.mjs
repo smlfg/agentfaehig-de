@@ -67,8 +67,9 @@ test("index.html = Live-Stand + freigegebene Änderungen (Satz, Impressum/Datens
   // Widget: nur relative Same-Origin-Aufrufe, kein innerHTML, KI-Hinweis sichtbar
   assert.ok(!/innerHTML/.test(snip));
   const urls = snip.replace(/<!--[\s\S]*?-->/g, "").match(/https?:\/\/[^"'\s<]+/g) || [];
-  assert.deepEqual(urls, ["https://www.human-agent-interface.com/datenschutz/"], "einzige externe URL im Widget: Datenschutz-Link");
+  assert.deepEqual(urls, ["https://www.human-agent-interface.com/datenschutz/#ki-chat"], "einzige externe URL im Widget: Datenschutz-Link (Anker #ki-chat)");
   assert.match(snip, /fetch\("\/api\/explain\/"/);
-  assert.match(snip, /Ich bin eine KI/);
+  assert.match(snip, /<strong>Du sprichst mit einer KI\.<\/strong>/);
+  assert.match(snip, /über Cloudflare verarbeitet/);
   assert.match(snip, /aria-expanded/);
 });
